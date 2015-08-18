@@ -1,0 +1,40 @@
+From fercor at servidor.unam.mx  Mon Jul 13 20:57:27 2009
+From: fercor at servidor.unam.mx (Fernando Cortes)
+Date: Mon, 13 Jul 2009 13:57:27 -0500
+Subject: [OpenDX2-dev] compiling issue on ubunutu 9.04
+Message-ID: <f7db56a50907131157k36897244y1120e0686da8b0a@mail.gmail.com>
+
+Hello
+
+I compiling opendx on ubuntu 9.04 on a AMD-64 workstation.
+I followed each step of the instruction given in
+http://blog.livedoor.jp/les_paul_sp/archives/635414.html
+but i have an extra issue:
+
+gcc -g -O2 -D_GNU_SOURCE -o dxexec -Wl,-export-dynamic main.o
+../dxmods/user.o ../libdx/mem.o ../libdx/memory.o -Wl,-Bsymbolic-functions
+../dpexec/.libs/libDPEXEC.a -L/usr/lib/X11 -L/usr/lib
+../dxmods/.libs/libDXMODS.a ../dxmods/.libs/libDXMODSN.a
+../libdx/.libs/libLIBDX.a ../hwrender/.libs/libHW.a
+../hwrender/opengl/.libs/libOPENGL.a -lnsl -lnetcdf -ldf -lXpm -ldl -lXm
+-lXp -lGLU -lGL -lXmu -lXt -lGraphicsMagick /usr/lib/liblcms.so
+/usr/lib/libtiff.so -lc /usr/lib/libfreetype.so /usr/lib/libjasper.so
+/usr/lib/libjpeg.so -lpng /usr/lib/libwmflite.so -lXext -lSM -lICE -lX11
+-lbz2 /usr/lib/libxml2.so -lz -lm -lpthread
+../dxmods/.libs/libDXMODS.a(_im_image.o): In function `write_im':
+/home/fercor/Compilar/dx-4.4.4/src/exec/dxmods/_im_image.c:305: undefined
+reference to `TemporaryFilename'
+collect2: ld returned 1 exit status
+make[3]: *** [dxexec] Error 1
+
+How can fix this problem?
+
+Can someone help me?
+
+Thank you
+
+Fernando
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/opendx2-dev/attachments/20090713/1496058d/attachment.html>
+

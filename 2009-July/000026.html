@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] compiling issue on ubunutu 9.04
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2009-July/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20compiling%20issue%20on%20ubunutu%209.04&In-Reply-To=%3Cf7db56a50907131157k36897244y1120e0686da8b0a%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] compiling issue on ubunutu 9.04</H1>
+    <B>Fernando Cortes</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20compiling%20issue%20on%20ubunutu%209.04&In-Reply-To=%3Cf7db56a50907131157k36897244y1120e0686da8b0a%40mail.gmail.com%3E"
+       TITLE="[OpenDX2-dev] compiling issue on ubunutu 9.04">fercor at servidor.unam.mx
+       </A><BR>
+    <I>Mon Jul 13 20:57:27 CEST 2009</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#26">[ date ]</a>
+              <a href="thread.html#26">[ thread ]</a>
+              <a href="subject.html#26">[ subject ]</a>
+              <a href="author.html#26">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello
+
+I compiling opendx on ubuntu 9.04 on a AMD-64 workstation.
+I followed each step of the instruction given in
+<A HREF="http://blog.livedoor.jp/les_paul_sp/archives/635414.html">http://blog.livedoor.jp/les_paul_sp/archives/635414.html</A>
+but i have an extra issue:
+
+gcc -g -O2 -D_GNU_SOURCE -o dxexec -Wl,-export-dynamic main.o
+../dxmods/user.o ../libdx/mem.o ../libdx/memory.o -Wl,-Bsymbolic-functions
+../dpexec/.libs/libDPEXEC.a -L/usr/lib/X11 -L/usr/lib
+../dxmods/.libs/libDXMODS.a ../dxmods/.libs/libDXMODSN.a
+../libdx/.libs/libLIBDX.a ../hwrender/.libs/libHW.a
+../hwrender/opengl/.libs/libOPENGL.a -lnsl -lnetcdf -ldf -lXpm -ldl -lXm
+-lXp -lGLU -lGL -lXmu -lXt -lGraphicsMagick /usr/lib/liblcms.so
+/usr/lib/libtiff.so -lc /usr/lib/libfreetype.so /usr/lib/libjasper.so
+/usr/lib/libjpeg.so -lpng /usr/lib/libwmflite.so -lXext -lSM -lICE -lX11
+-lbz2 /usr/lib/libxml2.so -lz -lm -lpthread
+../dxmods/.libs/libDXMODS.a(_im_image.o): In function `write_im':
+/home/fercor/Compilar/dx-4.4.4/src/exec/dxmods/_im_image.c:305: undefined
+reference to `TemporaryFilename'
+collect2: ld returned 1 exit status
+make[3]: *** [dxexec] Error 1
+
+How can fix this problem?
+
+Can someone help me?
+
+Thank you
+
+Fernando
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/opendx2-dev/attachments/20090713/1496058d/attachment.html">https://lists.berlios.de/pipermail/opendx2-dev/attachments/20090713/1496058d/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#26">[ date ]</a>
+              <a href="thread.html#26">[ thread ]</a>
+              <a href="subject.html#26">[ subject ]</a>
+              <a href="author.html#26">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>

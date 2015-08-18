@@ -1,0 +1,80 @@
+From morandini at aero.polimi.it  Fri Jun 27 09:53:21 2008
+From: morandini at aero.polimi.it (Marco Morandini)
+Date: Fri, 27 Jun 2008 09:53:21 +0200
+Subject: [OpenDX2-dev] Patch: allow building with gcc >= 4.3.1 (perhaps >=
+	4.3.0 ?)
+Message-ID: <48649C71.4010800@aero.polimi.it>
+
+A quick and dirty solution, because
+recent gccs barf with errors when
+trying to compile
+
+int main (unsigned int, char**),
+
+and do not accept an implicit cast calling
+DXApplication::initialize.
+A better solution would be to change
+the first argument of DXApplication::initialize,
+but I fear that this could require to change the code
+in a lot of files.
+Let me know if you think that, instead of this
+quick solution, I should try to change
+DXApplication::initialize.
+
+Thanks,
+
+Marco
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: patch.txt
+URL: <https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080627/2a1bc5cc/attachment.txt>
+
+From morandini at aero.polimi.it  Fri Jun 27 09:46:24 2008
+From: morandini at aero.polimi.it (Marco Morandini)
+Date: Fri, 27 Jun 2008 09:46:24 +0200
+Subject: [OpenDX2-dev] Patch: on unix,
+ use  Magick-config while testing for Magick headers and libraries
+Message-ID: <48649AD0.2060405@aero.polimi.it>
+
+On unix, Image Magick is not correctly detected
+if the CPPFLAGS and LDFLAGS are not correctly set.
+I'm proposing to duplicate the
+
+AC_CHECK_HEADER([magick/api.h],[passed=`expr $passed + 1`],[failed=`expr 
+$failed + 1`])
+
+line. The first instance, verbatim, for windows. The second,
+for unix, after adding the result of `Magick-config --cflags`
+to CPPFLAGS (that is restored to the previous value afterward).
+
+I'm not completely happy with this part of the patch
+
+-    AC_CHECK_LIB( Magick,GetImageInfo, passed=`expr $passed + 1`, 
+failed=`expr $failed + 1`, [ $LIB_MAGICK ])
++    AC_CHECK_LIB( c,GetImageInfo, passed=`expr $passed + 1`, 
+failed=`expr $failed + 1`, [ $LIB_MAGICK ])
+
+The reason of this change is that on some systems
+the Magick library is not called libMagick.
+For example, on my system I have
+
+libMagickWand and libMagickCore
+
+This is already taken in account by `Magick-config --libs` in
+
+      LIB_MAGICK="`Magick-config --ldflags` `Magick-config --libs`"
+
+so we simply have to check that a program using GetImageInfo can be 
+built with LIB_MAGICK flags. Unfortunately, AC_CHECK_LIB requires a 
+library name. So, I'm trying to fool the macro using, as library name, 
+the c standard library. I dont' know there is any macro better suited 
+for the check we want to perform here.
+
+Marco
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: patch.txt
+URL: <https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080627/80d2013b/attachment.txt>
+

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] Patch: allow building with gcc &gt;= 4.3.1 (perhaps &gt;=	4.3.0 ?)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2008-June/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20Patch%3A%20allow%20building%20with%20gcc%20%3E%3D%204.3.1%20%28perhaps%20%3E%3D%0A%094.3.0%20%3F%29&In-Reply-To=%3C48649C71.4010800%40aero.polimi.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000021.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] Patch: allow building with gcc &gt;= 4.3.1 (perhaps &gt;=	4.3.0 ?)</H1>
+    <B>Marco Morandini</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20Patch%3A%20allow%20building%20with%20gcc%20%3E%3D%204.3.1%20%28perhaps%20%3E%3D%0A%094.3.0%20%3F%29&In-Reply-To=%3C48649C71.4010800%40aero.polimi.it%3E"
+       TITLE="[OpenDX2-dev] Patch: allow building with gcc &gt;= 4.3.1 (perhaps &gt;=	4.3.0 ?)">morandini at aero.polimi.it
+       </A><BR>
+    <I>Fri Jun 27 09:53:21 CEST 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000021.html">[OpenDX2-dev] Patch: on unix, use  Magick-config while testing for Magick headers and libraries
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A quick and dirty solution, because
+recent gccs barf with errors when
+trying to compile
+
+int main (unsigned int, char**),
+
+and do not accept an implicit cast calling
+DXApplication::initialize.
+A better solution would be to change
+the first argument of DXApplication::initialize,
+but I fear that this could require to change the code
+in a lot of files.
+Let me know if you think that, instead of this
+quick solution, I should try to change
+DXApplication::initialize.
+
+Thanks,
+
+Marco
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: patch.txt
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080627/2a1bc5cc/attachment.txt">https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080627/2a1bc5cc/attachment.txt</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000021.html">[OpenDX2-dev] Patch: on unix, use  Magick-config while testing for Magick headers and libraries
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>

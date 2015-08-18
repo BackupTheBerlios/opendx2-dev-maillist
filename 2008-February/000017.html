@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] trying to compile for AMD 64
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20trying%20to%20compile%20for%20AMD%2064&In-Reply-To=%3C20080212143758.GB2856%40ryvius.greysector.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000016.html">
+   <LINK REL="Next"  HREF="000018.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] trying to compile for AMD 64</H1>
+    <B>Dominik 'Rathann' Mierzejewski</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20trying%20to%20compile%20for%20AMD%2064&In-Reply-To=%3C20080212143758.GB2856%40ryvius.greysector.net%3E"
+       TITLE="[OpenDX2-dev] trying to compile for AMD 64">dominik at greysector.net
+       </A><BR>
+    <I>Tue Feb 12 15:37:58 CET 2008</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000016.html">[OpenDX2-dev] trying to compile for AMD 64
+</A></li>
+        <LI>Next message: <A HREF="000018.html">[OpenDX2-dev] trying to compile for AMD 64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#17">[ date ]</a>
+              <a href="thread.html#17">[ thread ]</a>
+              <a href="subject.html#17">[ subject ]</a>
+              <a href="author.html#17">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tuesday, 12 February 2008 at 02:02, Dan O'Connell wrote:
+&gt;<i> 
+</I>&gt;<i> Suse 10.2 
+</I>&gt;<i> Linux dlin 2.6.18.8-0.5-default #1 SMP Fri Jun 22 12:17:53 UTC 2007 x86_64 x86_64 x86_64 GNU/Linux
+</I>&gt;<i> 
+</I>&gt;<i> Using dx-4.4.4.tar.gz, Openmotif 2.3.0-1, configure, and make I got this far:
+</I>&gt;<i> 
+</I>&gt;<i> gcc -DHAVE_CONFIG_H -I. -I. -I../../../include -I../../../include -I./../widgets -Dlinux  -I/usr/include    -g -O2 -D_GNU_SOURCE -c WorkspaceW.c
+</I>&gt;<i> WorkspaceW.c: In function &#145;SetValues&#146;:
+</I>&gt;<i> WorkspaceW.c:1559: error: &#145;XmFormConstraints&#146; undeclared (first use in this function)
+</I>&gt;<i> WorkspaceW.c:1559: error: (Each undeclared identifier is reported only once
+</I>&gt;<i> WorkspaceW.c:1559: error: for each function it appears in.)
+</I>&gt;<i> WorkspaceW.c: In function &#145;ChangeManaged&#146;:
+</I>&gt;<i> WorkspaceW.c:1926: error: &#145;XmFormConstraints&#146; undeclared (first use in this function)
+</I>&gt;<i> WorkspaceW.c:1928: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+</I>&gt;<i> WorkspaceW.c:1929: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+</I>&gt;<i> WorkspaceW.c:1930: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+</I>&gt;<i> WorkspaceW.c:1931: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+</I>&gt;<i> make[3]: *** [WorkspaceW.o] Error 1
+</I>&gt;<i> make[3]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp/widgets'
+</I>&gt;<i> make[2]: *** [all-recursive] Error 1
+</I>&gt;<i> make[2]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp'
+</I>&gt;<i> make[1]: *** [all-recursive] Error 1
+</I>&gt;<i> make[1]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src'
+</I>&gt;<i> make: *** [all-recursive] Error 1
+</I>&gt;<i> 
+</I>&gt;<i> Any ideas? I was hoping to build an AMD64 version.
+</I>
+Please post full ./configure output and make log, not only the last few
+lines. There might be more clues earlier.
+
+FWIW, it builds fine on Fedora, although with some patching.
+Feel free to use my specfile and patches to port it to SuSE:
+<A HREF="http://cvs.fedoraproject.org/viewcvs/rpms/dx/devel/">http://cvs.fedoraproject.org/viewcvs/rpms/dx/devel/</A>
+
+Regards,
+R.
+
+-- 
+Fedora contributor <A HREF="http://fedoraproject.org/wiki/DominikMierzejewski">http://fedoraproject.org/wiki/DominikMierzejewski</A>
+Livna contributor <A HREF="http://rpm.livna.org">http://rpm.livna.org</A> MPlayer developer <A HREF="http://mplayerhq.hu">http://mplayerhq.hu</A>
+&quot;Faith manages.&quot;
+        -- Delenn to Lennier in Babylon 5:&quot;Confessions and Lamentations&quot;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000016.html">[OpenDX2-dev] trying to compile for AMD 64
+</A></li>
+	<LI>Next message: <A HREF="000018.html">[OpenDX2-dev] trying to compile for AMD 64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#17">[ date ]</a>
+              <a href="thread.html#17">[ thread ]</a>
+              <a href="subject.html#17">[ subject ]</a>
+              <a href="author.html#17">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>

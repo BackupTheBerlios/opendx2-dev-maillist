@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20%5BPATCH%5D%20unsafe%20use%20of%20open%28%29%20with%20O_CREAT&In-Reply-To=%3C20070817231645.GD12314%40ryvius.pekin.waw.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000014.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT</H1>
+    <B>Dominik 'Rathann' Mierzejewski</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20%5BPATCH%5D%20unsafe%20use%20of%20open%28%29%20with%20O_CREAT&In-Reply-To=%3C20070817231645.GD12314%40ryvius.pekin.waw.pl%3E"
+       TITLE="[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT">dominik at greysector.net
+       </A><BR>
+    <I>Sat Aug 18 01:16:45 CEST 2007</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000014.html">[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Friday, 17 August 2007 at 18:53, Dominik 'Rathann' Mierzejewski wrote:
+&gt;<i> Hello.
+</I>&gt;<i> 
+</I>&gt;<i> Due to the recent glibc changes, applications which use open() in an unsafe
+</I>&gt;<i> way (i.e. in O_CREAT mode without setting file permissions) are abort()'ed.
+</I>&gt;<i> For more details, see
+</I>&gt;<i> <A HREF="https://www.redhat.com/archives/fedora-maintainers/2007-August/msg00293.html">https://www.redhat.com/archives/fedora-maintainers/2007-August/msg00293.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> It turns out that OpenDX has one such call in src/exec/libdx/fileio.c.
+</I>&gt;<i> 
+</I>&gt;<i> Please apply the attached patch to fix that.
+</I>
+Updated patch attached, found one more issue.
+
+Regards,
+R.
+
+-- 
+Fedora contributor <A HREF="http://fedoraproject.org/wiki/DominikMierzejewski">http://fedoraproject.org/wiki/DominikMierzejewski</A>
+Livna contributor <A HREF="http://rpm.livna.org">http://rpm.livna.org</A> MPlayer developer <A HREF="http://mplayerhq.hu">http://mplayerhq.hu</A>
+&quot;Faith manages.&quot;
+        -- Delenn to Lennier in Babylon 5:&quot;Confessions and Lamentations&quot;
+-------------- next part --------------
+--- dx-4.4.4/src/exec/libdx/fileio.c.open	2006-01-05 23:55:47.000000000 +0100
++++ dx-4.4.4/src/exec/libdx/fileio.c	2007-08-17 18:43:14.000000000 +0200
+@@ -263,7 +263,7 @@ Error _dxffile_open(char *name, int rw)
+ 	case 2:/* read/write */
+ 		fd = open(name, O_RDWR);
+ 		if (fd &lt; 0) {
+-			fd = open(name, O_WRONLY | O_CREAT);
++			fd = open(name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+ 			if (fd &lt; 0) {
+ 				DXSetError(ERROR_DATA_INVALID, 
+ 				&quot;can't open/create file '%s'&quot;, name);
+--- dx-4.4.4/src/exec/libdx/plock.c.open	2002-07-17 06:48:18.000000000 +0200
++++ dx-4.4.4/src/exec/libdx/plock.c	2007-08-17 19:05:14.000000000 +0200
+@@ -37,7 +37,8 @@ struct seminfo *__buf;      /* buffer fo
+ 
+ #define SEM_FLAGS  	 (IPC_CREAT | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
+ #define SHM_FLAGS  	 (IPC_CREAT | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
+-#define OPEN_FLAGS 	 (O_CREAT | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
++#define OPEN_FLAGS	 (O_CREAT)
++#define OPEN_MODE 	 (S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH)
+ #define IS_MINE(a)	 (locks-&gt;_owner[a] == getpid())
+ #define SET_OWNER(a)	 (locks-&gt;_owner[a] = getpid())
+ #define CLEAR_OWNER(a)	 (locks-&gt;_owner[a] = 0)
+@@ -268,7 +269,7 @@ PLockInit()
+ 
+     if (stat(LOCKFILE, &amp;statbuf))
+     {
+-        int fd = open(LOCKFILE, OPEN_FLAGS);
++        int fd = open(LOCKFILE, OPEN_FLAGS, OPEN_MODE);
+ 	if (fd &lt; 0)
+ 	{
+ 	    fprintf(stderr, &quot;initLocks: error accessing locks shared block: open\n&quot;);
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000014.html">[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#15">[ date ]</a>
+              <a href="thread.html#15">[ thread ]</a>
+              <a href="subject.html#15">[ subject ]</a>
+              <a href="author.html#15">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>

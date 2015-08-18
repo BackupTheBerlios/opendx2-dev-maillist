@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2007-August/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20%5BPATCH%5D%20unsafe%20use%20of%20open%28%29%20with%20O_CREAT&In-Reply-To=%3C20070817165325.GA12314%40ryvius.pekin.waw.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000015.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT</H1>
+    <B>Dominik 'Rathann' Mierzejewski</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20%5BPATCH%5D%20unsafe%20use%20of%20open%28%29%20with%20O_CREAT&In-Reply-To=%3C20070817165325.GA12314%40ryvius.pekin.waw.pl%3E"
+       TITLE="[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT">dominik at greysector.net
+       </A><BR>
+    <I>Fri Aug 17 18:53:25 CEST 2007</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000015.html">[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello.
+
+Due to the recent glibc changes, applications which use open() in an unsafe
+way (i.e. in O_CREAT mode without setting file permissions) are abort()'ed.
+For more details, see
+<A HREF="https://www.redhat.com/archives/fedora-maintainers/2007-August/msg00293.html">https://www.redhat.com/archives/fedora-maintainers/2007-August/msg00293.html</A>
+
+It turns out that OpenDX has one such call in src/exec/libdx/fileio.c.
+
+Please apply the attached patch to fix that.
+
+Regards,
+R.
+
+-- 
+Fedora contributor <A HREF="http://fedoraproject.org/wiki/DominikMierzejewski">http://fedoraproject.org/wiki/DominikMierzejewski</A>
+Livna contributor <A HREF="http://rpm.livna.org">http://rpm.livna.org</A> MPlayer developer <A HREF="http://mplayerhq.hu">http://mplayerhq.hu</A>
+&quot;Faith manages.&quot;
+        -- Delenn to Lennier in Babylon 5:&quot;Confessions and Lamentations&quot;
+-------------- next part --------------
+--- dx-4.4.4/src/exec/libdx/fileio.c.open	2006-01-05 23:55:47.000000000 +0100
++++ dx-4.4.4/src/exec/libdx/fileio.c	2007-08-17 18:23:27.000000000 +0200
+@@ -263,7 +263,7 @@ Error _dxffile_open(char *name, int rw)
+ 	case 2:/* read/write */
+ 		fd = open(name, O_RDWR);
+ 		if (fd &lt; 0) {
+-			fd = open(name, O_WRONLY | O_CREAT);
++			fd = open(name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+ 			if (fd &lt; 0) {
+ 				DXSetError(ERROR_DATA_INVALID, 
+ 				&quot;can't open/create file '%s'&quot;, name);
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000015.html">[OpenDX2-dev] [PATCH] unsafe use of open() with O_CREAT
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#14">[ date ]</a>
+              <a href="thread.html#14">[ thread ]</a>
+              <a href="subject.html#14">[ subject ]</a>
+              <a href="author.html#14">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>

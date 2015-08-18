@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] trying to compile for AMD 64
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2008-February/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20trying%20to%20compile%20for%20AMD%2064&In-Reply-To=%3CE1B8BB8AF0561F4F93ADEBC337C4184C01970B%40Server-Exch01.WLA.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000017.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] trying to compile for AMD 64</H1>
+    <B>Dan O'Connell</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20trying%20to%20compile%20for%20AMD%2064&In-Reply-To=%3CE1B8BB8AF0561F4F93ADEBC337C4184C01970B%40Server-Exch01.WLA.local%3E"
+       TITLE="[OpenDX2-dev] trying to compile for AMD 64">oconnell at lettis.com
+       </A><BR>
+    <I>Tue Feb 12 02:02:54 CET 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000017.html">[OpenDX2-dev] trying to compile for AMD 64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Suse 10.2 
+Linux dlin 2.6.18.8-0.5-default #1 SMP Fri Jun 22 12:17:53 UTC 2007 x86_64 x86_64 x86_64 GNU/Linux
+
+Using dx-4.4.4.tar.gz, Openmotif 2.3.0-1, configure, and make I got this far:
+
+gcc -DHAVE_CONFIG_H -I. -I. -I../../../include -I../../../include -I./../widgets -Dlinux  -I/usr/include    -g -O2 -D_GNU_SOURCE -c WorkspaceW.c
+WorkspaceW.c: In function &#145;SetValues&#146;:
+WorkspaceW.c:1559: error: &#145;XmFormConstraints&#146; undeclared (first use in this function)
+WorkspaceW.c:1559: error: (Each undeclared identifier is reported only once
+WorkspaceW.c:1559: error: for each function it appears in.)
+WorkspaceW.c: In function &#145;ChangeManaged&#146;:
+WorkspaceW.c:1926: error: &#145;XmFormConstraints&#146; undeclared (first use in this function)
+WorkspaceW.c:1928: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+WorkspaceW.c:1929: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+WorkspaceW.c:1930: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+WorkspaceW.c:1931: error: &#145;XmFormConstraintPart&#146; has no member named &#145;atta&#146;
+make[3]: *** [WorkspaceW.o] Error 1
+make[3]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp/widgets'
+make[2]: *** [all-recursive] Error 1
+make[2]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src'
+make: *** [all-recursive] Error 1
+
+Any ideas? I was hoping to build an AMD64 version.
+
+Cheers, DRHO
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080211/5b41cc79/attachment.html">https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080211/5b41cc79/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000017.html">[OpenDX2-dev] trying to compile for AMD 64
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#16">[ date ]</a>
+              <a href="thread.html#16">[ thread ]</a>
+              <a href="subject.html#16">[ subject ]</a>
+              <a href="author.html#16">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>

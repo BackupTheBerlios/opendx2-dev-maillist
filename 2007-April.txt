@@ -1,0 +1,19 @@
+From grivna at pangea.ru  Tue Apr  3 14:54:45 2007
+From: grivna at pangea.ru (Igor Grivko)
+Date: Tue, 3 Apr 2007 15:54:45 +0300
+Subject: [OpenDX2-dev] Problems with using DXlite on Windows
+Message-ID: <200704031654.47139.grivna@pangea.ru>
+
+Hello,
+
+I was using DX data model some years on Linux/Solaris (DXlite library). Now I 
+have to port one application on WIndows. I installed OpenDX from setup and 
+trying to compile my application with MSVC2003 C++ compiler.
+
+I've got a link error - cannot find _imp__lperror function. Is this problem 
+known? Can you very kindly help me?
+
+Best regards,
+Igor Grivko
+
+

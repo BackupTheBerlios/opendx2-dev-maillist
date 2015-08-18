@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] Patch: on unix, use  Magick-config while testing for Magick headers and libraries
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2008-June/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20Patch%3A%20on%20unix%2C%0A%20use%20%20Magick-config%20while%20testing%20for%20Magick%20headers%20and%20libraries&In-Reply-To=%3C48649AD0.2060405%40aero.polimi.it%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000020.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] Patch: on unix, use  Magick-config while testing for Magick headers and libraries</H1>
+    <B>Marco Morandini</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20Patch%3A%20on%20unix%2C%0A%20use%20%20Magick-config%20while%20testing%20for%20Magick%20headers%20and%20libraries&In-Reply-To=%3C48649AD0.2060405%40aero.polimi.it%3E"
+       TITLE="[OpenDX2-dev] Patch: on unix, use  Magick-config while testing for Magick headers and libraries">morandini at aero.polimi.it
+       </A><BR>
+    <I>Fri Jun 27 09:46:24 CEST 2008</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000020.html">[OpenDX2-dev] Patch: allow building with gcc &gt;= 4.3.1 (perhaps &gt;=	4.3.0 ?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On unix, Image Magick is not correctly detected
+if the CPPFLAGS and LDFLAGS are not correctly set.
+I'm proposing to duplicate the
+
+AC_CHECK_HEADER([magick/api.h],[passed=`expr $passed + 1`],[failed=`expr 
+$failed + 1`])
+
+line. The first instance, verbatim, for windows. The second,
+for unix, after adding the result of `Magick-config --cflags`
+to CPPFLAGS (that is restored to the previous value afterward).
+
+I'm not completely happy with this part of the patch
+
+-    AC_CHECK_LIB( Magick,GetImageInfo, passed=`expr $passed + 1`, 
+failed=`expr $failed + 1`, [ $LIB_MAGICK ])
++    AC_CHECK_LIB( c,GetImageInfo, passed=`expr $passed + 1`, 
+failed=`expr $failed + 1`, [ $LIB_MAGICK ])
+
+The reason of this change is that on some systems
+the Magick library is not called libMagick.
+For example, on my system I have
+
+libMagickWand and libMagickCore
+
+This is already taken in account by `Magick-config --libs` in
+
+      LIB_MAGICK=&quot;`Magick-config --ldflags` `Magick-config --libs`&quot;
+
+so we simply have to check that a program using GetImageInfo can be 
+built with LIB_MAGICK flags. Unfortunately, AC_CHECK_LIB requires a 
+library name. So, I'm trying to fool the macro using, as library name, 
+the c standard library. I dont' know there is any macro better suited 
+for the check we want to perform here.
+
+Marco
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: patch.txt
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080627/80d2013b/attachment.txt">https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080627/80d2013b/attachment.txt</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000020.html">[OpenDX2-dev] Patch: allow building with gcc &gt;= 4.3.1 (perhaps &gt;=	4.3.0 ?)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#21">[ date ]</a>
+              <a href="thread.html#21">[ thread ]</a>
+              <a href="subject.html#21">[ subject ]</a>
+              <a href="author.html#21">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>

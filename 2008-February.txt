@@ -1,0 +1,341 @@
+From oconnell at lettis.com  Tue Feb 12 02:02:54 2008
+From: oconnell at lettis.com (Dan O'Connell)
+Date: Mon, 11 Feb 2008 17:02:54 -0800
+Subject: [OpenDX2-dev] trying to compile for AMD 64
+Message-ID: <E1B8BB8AF0561F4F93ADEBC337C4184C01970B@Server-Exch01.WLA.local>
+
+
+Suse 10.2 
+Linux dlin 2.6.18.8-0.5-default #1 SMP Fri Jun 22 12:17:53 UTC 2007 x86_64 x86_64 x86_64 GNU/Linux
+
+Using dx-4.4.4.tar.gz, Openmotif 2.3.0-1, configure, and make I got this far:
+
+gcc -DHAVE_CONFIG_H -I. -I. -I../../../include -I../../../include -I./../widgets -Dlinux  -I/usr/include    -g -O2 -D_GNU_SOURCE -c WorkspaceW.c
+WorkspaceW.c: In function ?SetValues?:
+WorkspaceW.c:1559: error: ?XmFormConstraints? undeclared (first use in this function)
+WorkspaceW.c:1559: error: (Each undeclared identifier is reported only once
+WorkspaceW.c:1559: error: for each function it appears in.)
+WorkspaceW.c: In function ?ChangeManaged?:
+WorkspaceW.c:1926: error: ?XmFormConstraints? undeclared (first use in this function)
+WorkspaceW.c:1928: error: ?XmFormConstraintPart? has no member named ?atta?
+WorkspaceW.c:1929: error: ?XmFormConstraintPart? has no member named ?atta?
+WorkspaceW.c:1930: error: ?XmFormConstraintPart? has no member named ?atta?
+WorkspaceW.c:1931: error: ?XmFormConstraintPart? has no member named ?atta?
+make[3]: *** [WorkspaceW.o] Error 1
+make[3]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp/widgets'
+make[2]: *** [all-recursive] Error 1
+make[2]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp'
+make[1]: *** [all-recursive] Error 1
+make[1]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src'
+make: *** [all-recursive] Error 1
+
+Any ideas? I was hoping to build an AMD64 version.
+
+Cheers, DRHO
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080211/5b41cc79/attachment.html>
+
+From dominik at greysector.net  Tue Feb 12 15:37:58 2008
+From: dominik at greysector.net (Dominik 'Rathann' Mierzejewski)
+Date: Tue, 12 Feb 2008 15:37:58 +0100
+Subject: [OpenDX2-dev] trying to compile for AMD 64
+In-Reply-To: <E1B8BB8AF0561F4F93ADEBC337C4184C01970B@Server-Exch01.WLA.local>
+References: <E1B8BB8AF0561F4F93ADEBC337C4184C01970B@Server-Exch01.WLA.local>
+Message-ID: <20080212143758.GB2856@ryvius.greysector.net>
+
+On Tuesday, 12 February 2008 at 02:02, Dan O'Connell wrote:
+> 
+> Suse 10.2 
+> Linux dlin 2.6.18.8-0.5-default #1 SMP Fri Jun 22 12:17:53 UTC 2007 x86_64 x86_64 x86_64 GNU/Linux
+> 
+> Using dx-4.4.4.tar.gz, Openmotif 2.3.0-1, configure, and make I got this far:
+> 
+> gcc -DHAVE_CONFIG_H -I. -I. -I../../../include -I../../../include -I./../widgets -Dlinux  -I/usr/include    -g -O2 -D_GNU_SOURCE -c WorkspaceW.c
+> WorkspaceW.c: In function ?SetValues?:
+> WorkspaceW.c:1559: error: ?XmFormConstraints? undeclared (first use in this function)
+> WorkspaceW.c:1559: error: (Each undeclared identifier is reported only once
+> WorkspaceW.c:1559: error: for each function it appears in.)
+> WorkspaceW.c: In function ?ChangeManaged?:
+> WorkspaceW.c:1926: error: ?XmFormConstraints? undeclared (first use in this function)
+> WorkspaceW.c:1928: error: ?XmFormConstraintPart? has no member named ?atta?
+> WorkspaceW.c:1929: error: ?XmFormConstraintPart? has no member named ?atta?
+> WorkspaceW.c:1930: error: ?XmFormConstraintPart? has no member named ?atta?
+> WorkspaceW.c:1931: error: ?XmFormConstraintPart? has no member named ?atta?
+> make[3]: *** [WorkspaceW.o] Error 1
+> make[3]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp/widgets'
+> make[2]: *** [all-recursive] Error 1
+> make[2]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src/uipp'
+> make[1]: *** [all-recursive] Error 1
+> make[1]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src'
+> make: *** [all-recursive] Error 1
+> 
+> Any ideas? I was hoping to build an AMD64 version.
+
+Please post full ./configure output and make log, not only the last few
+lines. There might be more clues earlier.
+
+FWIW, it builds fine on Fedora, although with some patching.
+Feel free to use my specfile and patches to port it to SuSE:
+http://cvs.fedoraproject.org/viewcvs/rpms/dx/devel/
+
+Regards,
+R.
+
+-- 
+Fedora contributor http://fedoraproject.org/wiki/DominikMierzejewski
+Livna contributor http://rpm.livna.org MPlayer developer http://mplayerhq.hu
+"Faith manages."
+        -- Delenn to Lennier in Babylon 5:"Confessions and Lamentations"
+
+
+From oconnell at lettis.com  Wed Feb 13 17:05:01 2008
+From: oconnell at lettis.com (Dan O'Connell)
+Date: Wed, 13 Feb 2008 08:05:01 -0800
+Subject: [OpenDX2-dev] trying to compile for AMD 64
+In-Reply-To: <124e372b0802130435p33a71141qfcb339ca1c9a82c0@mail.gmail.com>
+References: <E1B8BB8AF0561F4F93ADEBC337C4184C01970B@Server-Exch01.WLA.local>
+	<20080212143758.GB2856@ryvius.greysector.net>
+	<124e372b0802130435p33a71141qfcb339ca1c9a82c0@mail.gmail.com>
+Message-ID: <E1B8BB8AF0561F4F93ADEBC337C4184C194814@Server-Exch01.WLA.local>
+
+Thanks for the updated WorkspaceW.c. However, I was able to successfully
+build opendx with the following changes. This was submitted, but
+apparently the attached files were too large to propagate to the mail
+list. The enclosed info should suffice.
+
+ 
+
+I was able to complete the build under OpenSuse 10.2 AMD64
+
+ 
+
+I made two changes to WorkspaceW.c
+
+ 
+
+397c397
+
+< #if (OLD_LESSTIF == 1)
+
+---
+
+> #if (OLD_LESSTIF == 0)
+
+1927c1927
+
+< #if (OLD_LESSTIF == 1)
+
+---
+
+> #if (OLD_LESSTIF == 0)
+
+ 
+
+And changed several Makefiles by hand since I'm not familiar with
+tinkering with configure. Here's an example of the changes from the
+uipp/startup/Makefile
+
+ 
+
+116c116
+
+< DX_X_LINK_LIBS = -lXp -lGLU -lGL -lm -lXmu -lXm -lXext -lXt -lX11 -lSM
+-lICE -lpthread  
+
+---
+
+> DX_X_LINK_LIBS = -lXp -lGLU -lGL -lm -lXmu -lXext -lXt -lX11 -lSM
+-lICE -L/usr/lib64 -lpthread  
+
+145c145
+
+< LIBS = -lnsl -lXinerama  -lXpm -ldl -lXp -lGLU -lGL -lXmu -lXm -llcms
+-ltiff -lfreetype -ljpeg -lfontconfig -lexpat -lXext -lSM -lICE -lX11
+-lXt -lbz2 -lz -lm -lpthread -lWand -lMagick
+
+---
+
+> LIBS = -lnsl -lXinerama  -lXpm -ldl -lXp -lGLU -lGL -lXmu -L/usr/lib64
+-L/usr/lib -llcms -ltiff -lfreetype -ljpeg -lfontconfig -lexpat -lXext
+-lSM -lICE -lX11 -lXt -lbz2 -lz -lm -lpthread -lWand -lMagick
+
+ 
+
+I basically added -lXm and deleted -L/usr/lib64 and -L/usr/lib, which
+was wrongly forcing the search back to the 32-bit libraries.
+
+ 
+
+Now I have a running 64-bit version of opendx. I had to download and
+install openmotif-devel-2-3.0beta2-32.x86_64.rpm, which wasn't in the
+download version of OpenSuse 10.2, to get the required Motif include and
+library files.
+
+ 
+
+Thanks to Dominik 'Rathann' Mierzejewski and Marilyn E Noz for
+suggestions. 
+
+ 
+
+On a different topic, the Windows version of opendx with the free Xming
+X-server.
+
+ 
+
+Cheers, DRHO
+
+ 
+
+Daniel R.H. O'Connell, Ph.D.
+
+Senior Geophysicist
+
+William Lettis & Associates, Inc.
+433 Park Point Drive, Suite 250
+Golden, CO 80401
+720-836-4887 tel
+
+720-836-4881 fax
+oconnell at lettis.com
+303-324-1377 cell
+www.lettis.com
+
+ 
+
+CONFIDENTIALITY NOTICE: This e-mail message and all attachments
+transmitted with it may contain legally privileged and confidential
+information intended solely for the use of the addressees. If the reader
+of this message is not the intended recipient, you are hereby notified
+that any reading, dissemination, distribution, copying, or other use of
+this message or its attachments is strictly prohibited. If you have
+received this message in error, please notify the sender immediately and
+then delete this message and all copies and backups thereof.
+
+________________________________
+
+From: Marilyn E Noz [mailto:marilyne.noz at gmail.com] 
+Sent: Wednesday, February 13, 2008 5:35 AM
+To: opendx2-dev at lists.berlios.de
+Cc: Dan O'Connell
+Subject: Re: [OpenDX2-dev] trying to compile for AMD 64
+
+ 
+
+I enclose a new version WorkspaceW.c with the OLD_LESSIF options
+elimiated. I'm 
+not sure why it couldn't be redefined at the top of the file.  This just
+compiled on my 
+SuSE 10.2,
+
+Marilyn
+
+
+
+On Feb 12, 2008 3:37 PM, Dominik 'Rathann' Mierzejewski
+<dominik at greysector.net> wrote:
+
+On Tuesday, 12 February 2008 at 02:02, Dan O'Connell wrote:
+>
+> Suse 10.2
+> Linux dlin 2.6.18.8-0.5-default #1 SMP Fri Jun 22 12:17:53 UTC 2007
+x86_64 x86_64 x86_64 GNU/Linux
+>
+> Using dx-4.4.4.tar.gz, Openmotif 2.3.0-1, configure, and make I got
+this far:
+>
+> gcc -DHAVE_CONFIG_H -I. -I. -I../../../include -I../../../include
+-I./../widgets -Dlinux  -I/usr/include    -g -O2 -D_GNU_SOURCE -c
+WorkspaceW.c
+> WorkspaceW.c: In function 'SetValues':
+> WorkspaceW.c:1559: error: 'XmFormConstraints' undeclared (first use in
+this function)
+> WorkspaceW.c:1559: error: (Each undeclared identifier is reported only
+once
+> WorkspaceW.c:1559: error: for each function it appears in.)
+> WorkspaceW.c: In function 'ChangeManaged':
+> WorkspaceW.c:1926: error: 'XmFormConstraints' undeclared (first use in
+this function)
+> WorkspaceW.c:1928: error: 'XmFormConstraintPart' has no member named
+'atta'
+> WorkspaceW.c:1929: error: 'XmFormConstraintPart' has no member named
+'atta'
+> WorkspaceW.c:1930: error: 'XmFormConstraintPart' has no member named
+'atta'
+> WorkspaceW.c:1931: error: 'XmFormConstraintPart' has no member named
+'atta'
+> make[3]: *** [WorkspaceW.o] Error 1
+> make[3]: Leaving directory
+`/usr/local/packages/opendx/dx-4.4.4/src/uipp/widgets'
+> make[2]: *** [all-recursive] Error 1
+> make[2]: Leaving directory
+`/usr/local/packages/opendx/dx-4.4.4/src/uipp'
+> make[1]: *** [all-recursive] Error 1
+> make[1]: Leaving directory `/usr/local/packages/opendx/dx-4.4.4/src'
+> make: *** [all-recursive] Error 1
+>
+> Any ideas? I was hoping to build an AMD64 version.
+
+Please post full ./configure output and make log, not only the last few
+lines. There might be more clues earlier.
+
+FWIW, it builds fine on Fedora, although with some patching.
+Feel free to use my specfile and patches to port it to SuSE:
+http://cvs.fedoraproject.org/viewcvs/rpms/dx/devel/
+
+Regards,
+R.
+
+--
+Fedora contributor http://fedoraproject.org/wiki/DominikMierzejewski
+Livna contributor http://rpm.livna.org MPlayer developer
+http://mplayerhq.hu
+"Faith manages."
+       -- Delenn to Lennier in Babylon 5:"Confessions and Lamentations"
+_______________________________________________
+OpenDX2-dev mailing list
+OpenDX2-dev at lists.berlios.de
+https://lists.berlios.de/mailman/listinfo/opendx2-dev
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080213/287db31b/attachment.html>
+
+From oconnell at lettis.com  Wed Feb 13 17:43:57 2008
+From: oconnell at lettis.com (Dan O'Connell)
+Date: Wed, 13 Feb 2008 08:43:57 -0800
+Subject: [OpenDX2-dev] The Windows version of opendx works with the free
+	Xming X-server
+In-Reply-To: <E1B8BB8AF0561F4F93ADEBC337C4184C194814@Server-Exch01.WLA.local>
+References: <E1B8BB8AF0561F4F93ADEBC337C4184C01970B@Server-Exch01.WLA.local><20080212143758.GB2856@ryvius.greysector.net><124e372b0802130435p33a71141qfcb339ca1c9a82c0@mail.gmail.com>
+	<E1B8BB8AF0561F4F93ADEBC337C4184C194814@Server-Exch01.WLA.local>
+Message-ID: <E1B8BB8AF0561F4F93ADEBC337C4184C194829@Server-Exch01.WLA.local>
+
+The Windows version of opendx works with the free Xming version 6.9.0.28
+X-server. The word works was missing from my last message.
+
+ 
+
+Daniel R.H. O'Connell, Ph.D.
+
+Senior Geophysicist
+
+William Lettis & Associates, Inc.
+433 Park Point Drive, Suite 250
+Golden, CO 80401
+720-836-4887 tel
+
+720-836-4881 fax
+oconnell at lettis.com
+303-324-1377 cell
+www.lettis.com
+
+ 
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/opendx2-dev/attachments/20080213/69dc972e/attachment.html>
+

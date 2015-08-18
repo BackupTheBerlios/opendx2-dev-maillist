@@ -1,0 +1,24 @@
+From dominik at greysector.net  Sun Nov 19 18:31:18 2006
+From: dominik at greysector.net (Dominik 'Rathann' Mierzejewski)
+Date: Sun, 19 Nov 2006 18:31:18 +0100
+Subject: [OpenDX2-dev] OpenDX or LessTif bug? tabs and fileselector
+Message-ID: <20061119173118.GA29759@rathann.pekin.waw.pl>
+
+I don't know if this is an OpenDX or LessTif bug, hence the crosspost.
+
+There seems to be a problem with tabs in VPE window and the file selector
+dialog when OpenDX is compiled against LessTif instead of OpenMotif. More
+details here:
+
+https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=216160
+
+Regards,
+R.
+
+-- 
+Fedora Extras contributor http://fedoraproject.org/wiki/DominikMierzejewski
+MPlayer developer         http://rpm.greysector.net/mplayer/
+"Faith manages."
+        -- Delenn to Lennier in Babylon 5:"Confessions and Lamentations"
+
+

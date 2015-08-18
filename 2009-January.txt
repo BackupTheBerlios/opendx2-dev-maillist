@@ -1,0 +1,192 @@
+From morandini at aero.polimi.it  Wed Jan 21 15:05:15 2009
+From: morandini at aero.polimi.it (Marco Morandini)
+Date: Wed, 21 Jan 2009 15:05:15 +0100
+Subject: [OpenDX2-dev] Patches ping
+Message-ID: <49772B9B.2080204@aero.polimi.it>
+
+I have two patches waiting for review.
+The first one,
+
+https://lists.berlios.de/pipermail/opendx2-dev/2008-June/000021.html
+
+should be more or less straightforward.
+
+For the second one,
+
+https://lists.berlios.de/pipermail/opendx2-dev/2008-June/000020.html
+
+I'd like advice on how to proceed.
+Is the proposed hack ok or should I try to change
+DXApplication::initialize ?
+
+Is someone else subscribed to this list? I'm asking this because after 
+having read D.Thomson's message
+http://www.opendx.org/cgi-bin/forum/YaBB.pl?num=1209491966
+
+Thanks,
+
+Marco
+
+
+
+From dthompsn at vizsolutions.com  Fri Jan 23 07:24:40 2009
+From: dthompsn at vizsolutions.com (David Thompson)
+Date: Thu, 22 Jan 2009 23:24:40 -0700
+Subject: [OpenDX2-dev] Patches ping
+In-Reply-To: <49772B9B.2080204@aero.polimi.it>
+References: <49772B9B.2080204@aero.polimi.it>
+Message-ID: <p06240803c59f1305cc9a@[192.168.1.114]>
+
+Marco,
+
+Unfortunately I'm the only one that is doing any code review at this 
+time. I have not had a chance to look at these but I will try to over 
+the next couple of weeks.
+
+David
+
+>I have two patches waiting for review.
+>The first one,
+>
+>https://lists.berlios.de/pipermail/opendx2-dev/2008-June/000021.html
+>
+>should be more or less straightforward.
+>
+>For the second one,
+>
+>https://lists.berlios.de/pipermail/opendx2-dev/2008-June/000020.html
+>
+>I'd like advice on how to proceed.
+>Is the proposed hack ok or should I try to change
+>DXApplication::initialize ?
+>
+>Is someone else subscribed to this list? I'm asking this because after
+>having read D.Thomson's message
+>http://www.opendx.org/cgi-bin/forum/YaBB.pl?num=1209491966
+>
+>Thanks,
+>
+>Marco
+>
+>_______________________________________________
+>OpenDX2-dev mailing list
+>OpenDX2-dev at lists.berlios.de
+>https://lists.berlios.de/mailman/listinfo/opendx2-dev
+
+
+-- 
+.............................................................................
+David L. Thompson                   Visualization and Imagery Solutions, Inc.
+mailto:dthompsn at vizsolutions.com    5515 Skyway Drive, Missoula, MT 59804
+
+
+From dominik at greysector.net  Sun Jan 25 00:28:15 2009
+From: dominik at greysector.net (Dominik 'Rathann' Mierzejewski)
+Date: Sun, 25 Jan 2009 00:28:15 +0100
+Subject: [OpenDX2-dev] Patches ping
+In-Reply-To: <p06240803c59f1305cc9a@[192.168.1.114]>
+References: <49772B9B.2080204@aero.polimi.it>
+	<p06240803c59f1305cc9a@[192.168.1.114]>
+Message-ID: <20090124232815.GB27694@mokona.greysector.net>
+
+On Friday, 23 January 2009 at 07:24, David Thompson wrote:
+> Marco,
+> 
+> Unfortunately I'm the only one that is doing any code review at this 
+> time. I have not had a chance to look at these but I will try to over 
+> the next couple of weeks.
+
+Good to see a living developer around here. :)
+
+Could you look at my patches as well?
+
+https://lists.berlios.de/pipermail/opendx2-dev/2007-August/000015.html
+http://cvs.fedoraproject.org/viewvc/devel/dx/dx-open.patch?view=log
+(unsafe open() usage)
+
+http://cvs.fedoraproject.org/viewvc/devel/dx/dx-gcc43.patch?view=log
+(fix build with gcc>=4.3 similar to Marco's)
+
+
+Also, could you look at this old bug report?
+https://lists.berlios.de/pipermail/opendx2-dev/2006-November/000012.html
+I have no idea if this is a bug in LessTif or OpenDX.
+
+And this one:
+https://bugzilla.redhat.com/show_bug.cgi?id=469664
+http://www.opendx.org/bugs/view.php?id=236
+
+Thanks in advance.
+
+Regards,
+R.
+
+-- 
+Fedora http://fedoraproject.org/wiki/User:Rathann
+RPMFusion http://rpmfusion.org | MPlayer http://mplayerhq.hu
+"Faith manages."
+        -- Delenn to Lennier in Babylon 5:"Confessions and Lamentations"
+
+
+From morandini at aero.polimi.it  Mon Jan 26 17:29:36 2009
+From: morandini at aero.polimi.it (Marco Morandini)
+Date: Mon, 26 Jan 2009 17:29:36 +0100
+Subject: [OpenDX2-dev] Patches ping
+In-Reply-To: <20090124232815.GB27694@mokona.greysector.net>
+References: <49772B9B.2080204@aero.polimi.it>	<p06240803c59f1305cc9a@[192.168.1.114]>
+	<20090124232815.GB27694@mokona.greysector.net>
+Message-ID: <497DE4F0.2070603@aero.polimi.it>
+
+Dominik 'Rathann' Mierzejewski wrote:
+> On Friday, 23 January 2009 at 07:24, David Thompson wrote:
+>> Marco,
+>>
+>> Unfortunately I'm the only one that is doing any code review at this 
+>> time. I have not had a chance to look at these but I will try to over 
+>> the next couple of weeks.
+> 
+> Good to see a living developer around here. :)
+> 
+> Could you look at my patches as well?
+> 
+> https://lists.berlios.de/pipermail/opendx2-dev/2007-August/000015.html
+> http://cvs.fedoraproject.org/viewvc/devel/dx/dx-open.patch?view=log
+> (unsafe open() usage)
+> 
+> http://cvs.fedoraproject.org/viewvc/devel/dx/dx-gcc43.patch?view=log
+> (fix build with gcc>=4.3 similar to Marco's)
+
+I think this last patch is in much better shape than mine.
+David, please, drop
+
+https://lists.berlios.de/pipermail/opendx2-dev/2008-June/000020.html
+
+from the list of patches to be reviewed
+(but, if you find time to look at them, please keep
+
+https://lists.berlios.de/pipermail/opendx2-dev/2008-June/000021.html
+
+).
+
+> 
+> Also, could you look at this old bug report?
+> https://lists.berlios.de/pipermail/opendx2-dev/2006-November/000012.html
+> I have no idea if this is a bug in LessTif or OpenDX.
+
+I've no idea about this.
+
+> And this one:
+> https://bugzilla.redhat.com/show_bug.cgi?id=469664
+> http://www.opendx.org/bugs/view.php?id=236
+
+For this one, reading the redhat bugzilla I've been redirected to
+
+http://www.opendx.org/cgi-bin/forum/YaBB.pl?num=1176042404
+
+I can confirm that the simple patch reported at the forum thread end
+seems to fix this long standing issue, at least for me. Thanks GNE!
+
+
+Marco
+
+

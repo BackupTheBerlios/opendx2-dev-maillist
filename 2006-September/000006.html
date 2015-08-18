@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenDX2-dev] [PATCH] small fixes
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/opendx2-dev/2006-September/index.html" >
+   <LINK REL="made" HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20%5BPATCH%5D%20small%20fixes&In-Reply-To=%3C20060924122113.GA16163%40rathann.pekin.waw.pl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000005.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenDX2-dev] [PATCH] small fixes</H1>
+    <B>Dominik 'Rathann' Mierzejewski</B> 
+    <A HREF="mailto:opendx2-dev%40lists.berlios.de?Subject=Re%3A%20%5BOpenDX2-dev%5D%20%5BPATCH%5D%20small%20fixes&In-Reply-To=%3C20060924122113.GA16163%40rathann.pekin.waw.pl%3E"
+       TITLE="[OpenDX2-dev] [PATCH] small fixes">dominik at greysector.net
+       </A><BR>
+    <I>Sun Sep 24 14:21:13 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000005.html">[OpenDX2-dev] [PATCH] small fixes
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[OpenDX2-dev] [PATCH] small fixes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sunday, 24 September 2006 at 06:45, David Thompson wrote:
+&gt;<i> &gt;dx-sys_h.patch: &lt;linux/sys.h&gt; is a kernel-space header and shouldn't be used
+</I>&gt;<i> &gt;in normal programs. It is also no longer included in current userspace kernel
+</I>&gt;<i> &gt;headers package in Fedora. OpenDX build fine without it so I assume it's not
+</I>&gt;<i> &gt;even necessary.
+</I>&gt;<i>
+</I>&gt;<i> We do build on other linux systems other than Fedora. Can you confirm 
+</I>&gt;<i> that this is the case for all the others as well (Suse, Gentoo)? 
+</I>&gt;<i> Those are/were needed to poll the machine to know how much physical 
+</I>&gt;<i> RAM was in the system.
+</I>
+It is present on Gentoo, which ships old 2.6.11 headers. I couldn't find it
+in OpenSUSE's packages. Anyway, this specific header is definitely going away
+from the official list of exported kernel headers, because it shouldn't have
+been there in the first place, see:
+<A HREF="https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=204538">https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=204538</A>
+and
+<A HREF="http://kerneltrap.org/node/6536">http://kerneltrap.org/node/6536</A>
+
+What is the function that you need from linux/sys.h?
+
+Regards,
+R.
+
+-- 
+Fedora Extras contributor <A HREF="http://fedoraproject.org/wiki/DominikMierzejewski">http://fedoraproject.org/wiki/DominikMierzejewski</A>
+MPlayer developer         <A HREF="http://rpm.greysector.net/mplayer/">http://rpm.greysector.net/mplayer/</A>
+&quot;Faith manages.&quot;
+        -- Delenn to Lennier in Babylon 5:&quot;Confessions and Lamentations&quot;
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000005.html">[OpenDX2-dev] [PATCH] small fixes
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[OpenDX2-dev] [PATCH] small fixes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6">[ date ]</a>
+              <a href="thread.html#6">[ thread ]</a>
+              <a href="subject.html#6">[ subject ]</a>
+              <a href="author.html#6">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/opendx2-dev">More information about the OpenDX2-dev
+mailing list</a><br>
+</body></html>
